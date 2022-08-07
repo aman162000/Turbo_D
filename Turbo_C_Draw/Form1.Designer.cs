@@ -60,6 +60,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.selectedColor = new System.Windows.Forms.Panel();
             this.copy_btn = new System.Windows.Forms.Button();
+            this.more_lable = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -411,11 +412,26 @@
             this.copy_btn.UseVisualStyleBackColor = true;
             this.copy_btn.Click += new System.EventHandler(this.CopyToClipBoard);
             // 
+            // more_lable
+            // 
+            this.more_lable.AutoSize = true;
+            this.more_lable.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.more_lable.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.more_lable.ForeColor = System.Drawing.Color.Blue;
+            this.more_lable.Location = new System.Drawing.Point(866, 651);
+            this.more_lable.Name = "more_lable";
+            this.more_lable.Size = new System.Drawing.Size(50, 23);
+            this.more_lable.TabIndex = 19;
+            this.more_lable.Text = "more";
+            this.more_lable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.more_lable.Click += new System.EventHandler(this.More_lable_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(941, 678);
+            this.Controls.Add(this.more_lable);
             this.Controls.Add(this.copy_btn);
             this.Controls.Add(this.selectedColor);
             this.Controls.Add(this.label4);
@@ -477,5 +493,6 @@
         private Label label4;
         private Panel selectedColor;
         private Button copy_btn;
+        private Label more_lable;
     }
 }

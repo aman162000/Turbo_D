@@ -76,6 +76,31 @@ namespace Turbo_C_Draw
 
         private void GetChoice(object sender, EventArgs e) => choice = ((RadioButton)sender).Name;
 
+        private void More_lable_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("explorer.exe", "https://github.com/aman162000/Turbo_D");
+
+            }
+            catch (Exception)
+            {
+                using System.Diagnostics.Process cmd = new();
+                cmd.StartInfo.FileName = "cmd.exe";
+                cmd.StartInfo.RedirectStandardInput = true;
+                cmd.StartInfo.RedirectStandardOutput = true;
+                cmd.StartInfo.CreateNoWindow = true;
+                cmd.StartInfo.UseShellExecute = false;
+                cmd.Start();
+
+
+                cmd.StandardInput.WriteLine("start https://github.com/aman162000/Turbo_D");
+                cmd.StandardInput.Flush();
+                cmd.StandardInput.Close();
+                cmd.WaitForExit();
+            }
+        }
+
         private void CopyToClipBoard(object sender, EventArgs e)
         {
             if (richTextBox1.Text != "")
