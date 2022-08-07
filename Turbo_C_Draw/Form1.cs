@@ -25,7 +25,7 @@ namespace Turbo_C_Draw
             InitializeComponent();
             pictureBox1.Size = new Size(640, 480);
             pictureBox1.MouseMove += new MouseEventHandler(GetCordinate);
-            Opacity = 0.5;
+            Opacity = 0.2 + (trackBar1.Value / 10.0);
             bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             graphics = Graphics.FromImage(bm);
             graphics.Clear(Color.Black);

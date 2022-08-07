@@ -153,7 +153,7 @@
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar1.Size = new System.Drawing.Size(56, 100);
             this.trackBar1.TabIndex = 10;
-            this.trackBar1.Value = 4;
+            this.trackBar1.Value = 6;
             this.trackBar1.Scroll += new System.EventHandler(this.TrackBar1_Scroll_1);
             // 
             // label3
