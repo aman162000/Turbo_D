@@ -37,7 +37,7 @@
             this.freeDraw = new System.Windows.Forms.RadioButton();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.refreshBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -94,7 +94,7 @@
             this.rectangle.TabStop = true;
             this.rectangle.Text = "Rectangle";
             this.rectangle.UseVisualStyleBackColor = true;
-            this.rectangle.CheckedChanged += new System.EventHandler(this.getChoice);
+            this.rectangle.CheckedChanged += new System.EventHandler(this.GetChoice);
             // 
             // rectangle_fill
             // 
@@ -106,7 +106,7 @@
             this.rectangle_fill.TabStop = true;
             this.rectangle_fill.Text = "Rectangle fill";
             this.rectangle_fill.UseVisualStyleBackColor = true;
-            this.rectangle_fill.CheckedChanged += new System.EventHandler(this.getChoice);
+            this.rectangle_fill.CheckedChanged += new System.EventHandler(this.GetChoice);
             // 
             // circle
             // 
@@ -118,7 +118,7 @@
             this.circle.TabStop = true;
             this.circle.Text = "Circle";
             this.circle.UseVisualStyleBackColor = true;
-            this.circle.CheckedChanged += new System.EventHandler(this.getChoice);
+            this.circle.CheckedChanged += new System.EventHandler(this.GetChoice);
             // 
             // line
             // 
@@ -130,7 +130,7 @@
             this.line.TabStop = true;
             this.line.Text = "Line";
             this.line.UseVisualStyleBackColor = true;
-            this.line.CheckedChanged += new System.EventHandler(this.getChoice);
+            this.line.CheckedChanged += new System.EventHandler(this.GetChoice);
             // 
             // freeDraw
             // 
@@ -142,7 +142,7 @@
             this.freeDraw.TabStop = true;
             this.freeDraw.Text = "Free draw";
             this.freeDraw.UseVisualStyleBackColor = true;
-            this.freeDraw.CheckedChanged += new System.EventHandler(this.getChoice);
+            this.freeDraw.CheckedChanged += new System.EventHandler(this.GetChoice);
             // 
             // trackBar1
             // 
@@ -153,7 +153,7 @@
             this.trackBar1.Size = new System.Drawing.Size(56, 100);
             this.trackBar1.TabIndex = 10;
             this.trackBar1.Value = 4;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll_1);
+            this.trackBar1.Scroll += new System.EventHandler(this.TrackBar1_Scroll_1);
             // 
             // label3
             // 
@@ -165,15 +165,15 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "Opacity";
             // 
-            // button2
+            // refreshBtn
             // 
-            this.button2.Location = new System.Drawing.Point(678, 588);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(238, 62);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Refresh";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.refreshBtn.Location = new System.Drawing.Point(678, 588);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(238, 62);
+            this.refreshBtn.TabIndex = 13;
+            this.refreshBtn.Text = "Refresh";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            this.refreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
             // 
             // pictureBox1
             // 
@@ -185,10 +185,10 @@
             this.pictureBox1.Size = new System.Drawing.Size(640, 480);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox1_Paint);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseUp);
             // 
             // richTextBox1
             // 
@@ -409,7 +409,7 @@
             this.copy_btn.TabIndex = 18;
             this.copy_btn.Text = "Copy";
             this.copy_btn.UseVisualStyleBackColor = true;
-            this.copy_btn.Click += new System.EventHandler(this.copyToClipBoard);
+            this.copy_btn.Click += new System.EventHandler(this.CopyToClipBoard);
             // 
             // Form1
             // 
@@ -422,7 +422,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.freeDraw);
@@ -436,7 +436,6 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Turbo D";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -455,7 +454,7 @@
         private RadioButton freeDraw;
         private TrackBar trackBar1;
         private Label label3;
-        private Button button2;
+        private Button refreshBtn;
         private PictureBox pictureBox1;
         private RichTextBox richTextBox1;
         private Panel panel1;

@@ -12,42 +12,33 @@ namespace Turbo_C_Draw
 {
     public partial class Form1 : Form
     {
-        Bitmap bm;
-        Point point_x, point_y;
-        Graphics graphics;
-        bool isPaint = false;
-        String choice;
-        Pen pen = new(Color.White,1);
-        int x,y,start_x,start_y,end_x,end_y;
-        String selected_Color;
+        private readonly Bitmap bm;
+        private Point point_x, point_y;
+        private readonly Graphics graphics;
+        bool isPaint;
+        private string choice = "";
+        private readonly Pen pen = new(Color.White, 1);
+        private int x, y, start_x, start_y, end_x, end_y;
+        private string selected_Color = "";
         public Form1()
         {
             InitializeComponent();
-            Size size = new(640, 480);
-            this.pictureBox1.Size = size;
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.getCordinate);
-            this.Opacity = 0.5;
-            bm = new Bitmap(pictureBox1.Width,pictureBox1.Height);
+            pictureBox1.Size = new Size(640, 480);
+            pictureBox1.MouseMove += new MouseEventHandler(GetCordinate);
+            Opacity = 0.5;
+            bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             graphics = Graphics.FromImage(bm);
             graphics.Clear(Color.Black);
-            this.pictureBox1.Image = bm;
-            this.selectedColor.BackColor = Color.White;
+            pictureBox1.Image = bm;
+            selectedColor.BackColor = Color.White;
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
-        private void getCordinate(object sender, MouseEventArgs e)
-        {
-            label1.Text = e.X+","+e.Y;
-           
-        }
+        private void GetCordinate(object? sender, MouseEventArgs e) => label1.Text = e.X + "," + e.Y;
 
-        private void button2_Click(object sender, EventArgs e)
+        private void RefreshBtn_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult;
-            dialogResult = MessageBox.Show("Are you sure?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var dialogResult = MessageBox.Show("Are you sure?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
                 graphics.Clear(Color.Black);
@@ -58,7 +49,7 @@ namespace Turbo_C_Draw
           
         }
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        private void PictureBox1_Paint(object sender, PaintEventArgs e)
         {
 
             if (isPaint)
@@ -83,14 +74,12 @@ namespace Turbo_C_Draw
             }
         }
 
-        private void getChoice(object sender, EventArgs e)
-        {
-            choice = ((RadioButton)sender).Name;
-        }
+        private void GetChoice(object sender, EventArgs e) => choice = ((RadioButton)sender).Name;
 
-        private void copyToClipBoard(object sender, EventArgs e)
+        private void CopyToClipBoard(object sender, EventArgs e)
         {
-            if(richTextBox1.Text != "") {
+            if (richTextBox1.Text != "")
+            {
                 Clipboard.SetText(richTextBox1.Text);
                 MessageBox.Show("Copied to clipboard.", "Message",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
@@ -100,7 +89,9 @@ namespace Turbo_C_Draw
             }
         }
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+       
+
+        private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             isPaint = true;
             point_y = e.Location;
@@ -108,16 +99,20 @@ namespace Turbo_C_Draw
             start_y = e.Y;
         }
 
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (isPaint)
             {
                 if (choice == "freeDraw")
                 {
                     point_x = e.Location;
-                    graphics.FillRectangle(new SolidBrush(pen.Color), point_x.X, point_y.Y,1,1);
+                    graphics.FillRectangle(brush: new SolidBrush(pen.Color),
+                                           x: point_x.X,
+                                           y: point_y.Y,
+                                           width: 1,
+                                           height: 1);
                     point_y = point_x;
-                    richTextBox1.Text += "putpixel(" + point_x.X + "," + point_x.Y + ","+ selected_Color + ")\n";
+                    richTextBox1.Text += "putpixel(" + point_x.X + "," + point_x.Y + "," + selected_Color + ")\n";
                 }
 
 
@@ -130,13 +125,13 @@ namespace Turbo_C_Draw
             pictureBox1.Refresh();
         }
 
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             isPaint = false;
             end_x = x - start_x;
             end_y = y - start_y;
-            
-            if(choice == "line")
+
+            if (choice == "line")
             {
                 graphics.DrawLine(pen,start_x,start_y,x,y);
                 richTextBox1.Text += "line(" + start_x + "," + start_y + "," + x + "," + y +");\n";
@@ -158,7 +153,7 @@ namespace Turbo_C_Draw
                 graphics.DrawEllipse(pen, Math.Min(start_x, x), Math.Min(start_y, y), Math.Abs(end_x), Math.Abs(end_y));
 
 
-                if ((start_x > end_x)&(start_y > end_y))
+                if ((start_x > end_x) & (start_y > end_y))
                 {
 
                 richTextBox1.Text += "ellipse(" + (Math.Min(start_x, x) - (int)Math.Round(Math.Abs(end_x) / 2.0)) + "," + (Math.Min(start_y, y) - (int)Math.Round(Math.Abs(end_y) / 2.0)) + ",0,360," + (int)Math.Round(Math.Abs(end_x)/2.0) + "," + (int)Math.Round(Math.Abs(end_y)/2.0) + ");\n";
@@ -188,19 +183,10 @@ namespace Turbo_C_Draw
 
             pen.Color = selectedColor.BackColor = ((Button)sender).BackColor;
             selected_Color = ((Button)sender).Name.ToUpperInvariant();
-            richTextBox1.Text +="setcolor("+((Button)sender).Name.ToUpperInvariant()+ ");\nsetfillstyle(SOLID_FILL,"+((Button)sender).Name.ToUpperInvariant() + ");\n";
+            richTextBox1.Text += "setcolor(" + ((Button)sender).Name.ToUpperInvariant() + ");\nsetfillstyle(SOLID_FILL," + ((Button)sender).Name.ToUpperInvariant() + ");\n";
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
 
-        }
-
-        private void trackBar1_Scroll_1(object sender, EventArgs e)
-        {
-                System.Diagnostics.Debug.WriteLine(ActiveForm.Opacity+","+trackBar1.Value);
-                Form1.ActiveForm.Opacity = 0.2+((double)trackBar1.Value / 10.0);            
-        }
+        private void TrackBar1_Scroll_1(object sender, EventArgs e) => ActiveForm.Opacity = 0.2 + (trackBar1.Value / 10.0);
     }
 }
